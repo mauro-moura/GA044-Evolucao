@@ -15,6 +15,6 @@ def generate_random_phrase_with_mutation(initial_phrase, alphabet, u):
     for i in range(len(new_phrase)):
         # chance = random.randint(0, 10**5)/ 10**5
         chance = random.random()
-        if u <= chance:
+        if chance <= u:
             new_phrase[i] = random.choice(alphabet)
     return ''.join(new_phrase)
