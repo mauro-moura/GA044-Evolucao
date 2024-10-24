@@ -2,7 +2,7 @@
 import scipy.stats as stats
 
 # Chi squared freedom table: https://towardsdatascience.com/statistics-in-python-using-chi-square-for-feature-selection-d44f467ca745
-# In our case, we have 2 degrees of freedom, so we will use the 0.05 cut value and the critical value of 5.99
+# In our case, we have 1 degrees of freedom (quantity of independent variables), so we will use the 0.05 cut value and the critical value of 3.84
 
 # Chi squared test
 def chi_squared_test(observed, expected):
@@ -16,9 +16,9 @@ def verify_chi_squared(chi_squared_value, degrees_of_freedom, cut_value=0.05):
     # print(p_value)
     return p_value > cut_value
 
-def run_chi_squared_test(observed, expected, n):
+def run_chi_squared_test(observed, expected, n=1):
     chi_squared = chi_squared_test(observed, expected)
-    # is_correlated = chi_squared < 5.99
+    # is_correlated = chi_squared < 3.84
     is_correlated = verify_chi_squared(chi_squared, n)
-    # print(f"Chi squared value: {chi_squared}, critical value: 5.99, is correlated: {is_correlated}")
+    # print(f"Chi squared value: {chi_squared}, critical value: 3.84, is correlated: {is_correlated}")
     return chi_squared, is_correlated

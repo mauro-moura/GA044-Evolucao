@@ -8,6 +8,10 @@ def mutation_q(p0, v, t):
     q = p0 * (1 - v)**t
     return q
 
+def generate_random_samples(p, q, N):
+    values = [p**2 * N, 2*p*q*N, q**2 * N]
+    return values
+
 def next_generation(p0, q0, u, v):
     p = p0 * (1 - u) + q0 * v
     q = p0 * u + q0 * (1 - v)
@@ -56,7 +60,7 @@ def plot_pt_qt(t, p_t, q_t, p0, q0):
     # plt.title(f'u = {u}, v = {v}')
     plt.show()
 
-def plot_all(t, p_t_list, q_t_list, p2_t_list, q2_t_list, pq_t_list, chi_squared_list, p0_list, q0_list, u, v):
+def plot_all(t, p_t_list, q_t_list, p2_t_list, q2_t_list, pq_t_list, chi_squared_list, p0_list, q0_list, u, v, chi_critic=3.84, gen_ehw=None):
     plt.figure(figsize=(16, 9))
 
     plt.subplot(3, 3, 1)
@@ -65,6 +69,8 @@ def plot_all(t, p_t_list, q_t_list, p2_t_list, q2_t_list, pq_t_list, chi_squared
         counter += 1
         plt.plot(t, p_t, label=f'p_{counter} = {p0:.4f}')
         plt.plot(t, q_t, label=f'q_{counter} = {q0:.4f}')
+        if gen_ehw:
+            plt.axvline(x=gen_ehw, color='r', linestyle='--')
     plt.legend()
 
     plt.subplot(3, 3, 2)
@@ -81,6 +87,8 @@ def plot_all(t, p_t_list, q_t_list, p2_t_list, q2_t_list, pq_t_list, chi_squared
     for chi_squared in chi_squared_list:
         counter += 1
         plt.plot(t, chi_squared, label=f'chi²_{counter}')
+        # Draw a red line on the critical value
+        plt.axhline(y=chi_critic, color='r', linestyle='--')
     plt.legend()
 
     plt.suptitle(f'u = {u}, v = {v}')
