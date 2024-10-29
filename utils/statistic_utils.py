@@ -14,7 +14,7 @@ def chi_squared_test(observed, expected):
 def verify_chi_squared(chi_squared_value, degrees_of_freedom, cut_value=0.05):
     p_value = 1 - stats.chi2.cdf(chi_squared_value, degrees_of_freedom)
     # print(p_value)
-    return p_value > cut_value
+    return p_value > cut_value # Se p_value < 0.05, não há EHW
 
 def run_chi_squared_test(observed, expected, n=1):
     chi_squared = chi_squared_test(observed, expected)
