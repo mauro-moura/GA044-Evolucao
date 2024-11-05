@@ -16,9 +16,6 @@ sys.path.append(ROOT_DIR)
 # - Paisagem adaptativa: p1 x p2 x p3
 
 # %%
-# plt.switch_backend('inline')
-
-# %%
 def next_gen(p2, pq, pr, q2, qr, r2, wAA, wAB, wAC, wBB, wBC, wCC):
     # Calcular frequência ajustada
     wAA_adj = wAA * p2
@@ -159,10 +156,8 @@ def run(p0, q0, r0, wAA, wAB, wAC, wBB, wBC, wCC, n_gen):
 
     # Add color bar to indicate the mean fitness
     fig.colorbar(surf, shrink=0.5, aspect=5)
-    plt.ion()
+    # plt.ion()
     plt.show()
-
-
 
 # %% [markdown]
 # # Caso 1
@@ -248,6 +243,26 @@ wAC = 0.9
 wBC = 0.9
 
 n_gen = 100
+
+run(p0, q0, r0, wAA, wAB, wAC, wBB, wBC, wCC, n_gen)
+
+# %% [markdown]
+# # Testes
+
+# %%
+p0 = 0.5
+q0 = 0.4
+r0 = 1 - p0 - q0
+
+wAA = 0.5
+wBB = 0.4
+wCC = 0.4
+
+wAB = 1
+wAC = 1
+wBC = 1
+
+n_gen = 50
 
 run(p0, q0, r0, wAA, wAB, wAC, wBB, wBC, wCC, n_gen)
 
