@@ -1,5 +1,5 @@
 
-from utils.evolution_functions import generate_random_samples, next_generation
+from utils.evolution_functions import generate_random_samples, next_generation, next_finite_generation
 from utils.plot_utils import plot_all
 from utils.statistic_utils import run_chi_squared_test
 
@@ -121,10 +121,6 @@ def run_experiment(u_list, v_list, p0_list, q0_list, N, t, n, precision=10):
 
 def run_experiment_with_population(u_list, v_list, p0_list, q0_list, pop_size, t, n):
     '''
-    Dúvida: Se eu defino número de população, como faço?
-    Eu calculo como pop_size sendo a população de alelos, ou a população total?
-    Se for população de alelos, eu preciso multiplicar por 2 e calcular as frequências?
-    Se você me diz população 5, são 5 indivídus ou 5 alelos?
     '''
     estag_gens = {}
     eq_gens = {}
@@ -158,7 +154,7 @@ def run_experiment_with_population(u_list, v_list, p0_list, q0_list, pop_size, t
                         continue
 
                     # Calcular próxima geração sem deriva genética, apenas mutação
-                    p, q = next_generation(p_t[i-1], q_t[i-1], u, v)
+                    p, q = next_finite_generation(p_t[i-1], q_t[i-1], u, v, pop_size)
 
                     if int(p * pop_size) == int(q * pop_size) and not eq_gens.get(dict_key, None):
                         eq_gens[dict_key] = i

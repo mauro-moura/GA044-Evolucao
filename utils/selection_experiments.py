@@ -24,6 +24,25 @@ def next_gen(p2, pq, q2, wAA, wAa, waa):
 
     return p1, q1, w_med
 
+def next_finite_gen(p2, pq, q2, wAA, wAa, waa, pop_size):
+     # Calcular frequência ajustada
+    wAA_adj = wAA * p2
+    wAa_adj = wAa * pq
+    waa_adj = waa * q2
+
+    # Calcular aptidão média
+    w_med = wAA_adj + wAa_adj + waa_adj
+
+    wAA_apos = wAA_adj / w_med
+    wAa_apos = wAa_adj / w_med
+    waa_apos = waa_adj / w_med
+
+    # Calcular frequência após
+    p1 = wAA_apos + 0.5 * wAa_apos
+    q1 = 1 - p1
+
+    return p1, q1, w_med
+
 def calc_freq(p0, q0):
     p2 = p0**2
     pq = 2*p0*q0
@@ -158,7 +177,7 @@ def run_experiment_with_population(p0, q0, wAA, wAa, waa, pop_size, n_gen):
     ehw_gens = {}
     dict_key = f'{wAA}_{wAa}_{waa}'
     for i in range(n_gen):
-        p, q, w_med = next_gen(p2_list[i], pq_list[i], q2_list[i], wAA, wAa, waa)
+        p, q, w_med = next_finite_gen(p2_list[i], pq_list[i], q2_list[i], wAA, wAa, waa, pop_size)
         p2, pq, q2 = calc_freq(p, q)
 
         # print(w_med)
