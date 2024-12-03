@@ -24,20 +24,8 @@ def next_gen(p2, pq, q2, wAA, wAa, waa):
 
     return p1, q1, w_med
 
-def next_finite_gen(population, wAA, wAa, waa, pop_size):
-    """
-    Porentaagem de indivíduos
-
-    100% dos AA
-    100% dos Aa
-    0% dos aa
-
-    Só vai mudar a parte que entra na função.
-    """
-
-    p2, pq, q2 = generate_random_samples(population, pop_size)
-    
-    # Calcular frequência ajustada
+def next_finite_gen(p2, pq, q2, wAA, wAa, waa, pop_size):
+     # Calcular frequência ajustada
     wAA_adj = wAA * p2
     wAa_adj = wAa * pq
     waa_adj = waa * q2
